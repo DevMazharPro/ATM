@@ -31,7 +31,7 @@ while (tries > 0) {
         message: "Select an Option",
         type: "list",
         name: "option",
-        choices: ["Withdraw", "Fast Cash", "Check Balance"],
+        choices: ["Withdraw", "Fast Cash", "Check Balance", "Change Pin"],
       },
       {
         message: "Enter Amount in Multiple of 500 RS",
@@ -57,11 +57,31 @@ while (tries > 0) {
           return userD.option === "Check Balance";
         },
       },
+      {
+        message: "Enter New Pin:",
+        type: "password",
+        name: "pin",
+        when(userD) {
+          return userD.option === "Change Pin";
+        },
+      },
     ]);
-    if (userD.option === "Withdraw", "Fast Cash") {
-      userData.balance = userData.balance - userD.amount;
-      console.log(`Your new balance is ${userData.balance}`);
+    if (userD.option === "Withdraw" || userD.option === "Fast Cash") {
+    //   userData.balance = userData.balance - userD.amount;
+    //   console.log(`Your new balance is ${userData.balance}`);
+    if (userD.amount > userData.balance){
+        console.log("Insufficient Balance");
+    } else{
+        userData.balance = userData.balance - userD.amount;
+        console.log(`Your new balance is ${userData.balance}`);
     }
-    tries--;
-  }
-}
+    } else if (userD.option === "Change Pin") {
+      userData.pin = userD.pin;
+      console.log(`Your new pin is ${userData.pin}`);
+    }
+  };
+  tries--;
+  if (tries === 0) {
+    console.log(`Card Blocked`);
+  };
+};
