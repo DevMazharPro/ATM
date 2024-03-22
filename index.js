@@ -59,8 +59,6 @@ while (tries > 0) {
             },
         ]);
         if (userD.option === "Withdraw" || userD.option === "Fast Cash") {
-            //   userData.balance = userData.balance - userD.amount;
-            //   console.log(`Your new balance is ${userData.balance}`);
             if (userD.amount > userData.balance) {
                 console.log("Insufficient Balance");
             }
